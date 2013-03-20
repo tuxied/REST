@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <!-- Bootstrap -->
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">-->
+	
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+	<!--<script type="text/javascript" src="js/jquery.ui.timepicker.js"></script>-->
+	
+	
+	
+	
+	<link type="text/css" href="css/ui-lightness/jquery-ui-1.10.2.custom.css" rel="Stylesheet" />
+	<link type="text/css" href="css/ui-lightness/jquery.ui.timepicker.css" rel="Stylesheet" />
+  </head>
+  <body>
+    <h2>V�lj datum du vill boka</h2>
+    <!--<script src="http://code.jquery.com/jquery.js"></script>-->
+	<!--<script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>-->
+	<!--<script src="http://code.jquery.com/jqueryui-latest.min.js"></script>-->
+	
+    <!--<script src="js/bootstrap.min.js"></script>-->
+	
+	
+	
+	
+
+
+
+<form id="booking" method="POST" action="http://localhost:8080/REST/api/hello" enctype="application/x-www-form-urlencoded"
+target="POPUPW"
+    onsubmit="POPUPW = window.open('about:blank','POPUPW',
+   'width=600,height=400');">	
+	
+	<input type="text" name="date" id="date"><p>
+	Tid<br>
+	<input type="text" name="time" id="time"><p>
+	Slut Tid<br>
+	<input type="text" name="endTime" id="endTime">
+	<input type="submit" value="Submit">
+</form>	
+	
+	
+	<h2>Bokningar</h2>
+	<div id="placeholder"></div>
+	
+	<script>
+		$( document ).ready(function() {
+			//input fields
+			$('#date').datepicker();
+			$('#time').timepicker();
+			$('#endTime').timepicker();
+			
+			//get
+			$.getJSON('http://localhost:8080/REST/api/hello', function(data) {
+				var output="<ul>";
+				for (var i in data.users) {
+					output+="<li>" + data.users[i].firstName + " " + data.users[i].lastName + " " + data.users[i].reg.month+"</li>";
+				}
+
+				output+="</ul>";
+				document.getElementById("placeholder").innerHTML=output;
+			});
+			
+			//send
+// 			$('#booking').on('submit',function () {
+// 				$.ajax({
+// 					url: 'submit.html',
+// 					cache: false,
+// 					type: 'POST',
+// 					data : $('#booking').serialize(),
+// 					success: function(json) {
+// 						alert('all done');
+// 					}
+// 				});
+// 			});			
+				
+		
+		});
+    </script>
+	
+  </body>
+</html>
